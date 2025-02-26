@@ -3,7 +3,13 @@ package com.novel;
 import com.novel.config.ApiKeyConfig;
 import com.novel.processor.ChapterProcessor;
 import com.novel.processor.GeminiApiProcessor;
+import com.novel.service.ChapterFileService;
+import com.novel.service.RateLimiterService;
+import com.novel.service.impl.ChapterFileServiceImpl;
+import com.novel.service.impl.GeminiApiServiceImpl;
+import com.novel.service.impl.RateLimiterServiceImpl;
 import com.novel.util.Constants;
+import java.util.concurrent.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +58,12 @@ public class NovelReaderApp {
             }
             
             // 5. 调用Gemini API
-            GeminiApiProcessor apiProcessor = new GeminiApiProcessor(apiKeyConfig.getApiKey());
+            GeminiApiProcessor apiProcessor = new GeminiApiProcessor(
+                new GeminiApiServiceImpl(apiKeyConfig.getApiKey()),
+                new ChapterFileServiceImpl(),
+                new RateLimiterServiceImpl(Executors.newScheduledThreadPool(10)),
+                Executors.newFixedThreadPool(10)
+            );
             boolean apiCallResult = apiProcessor.processChapterFiles();
             
             if (!apiCallResult) {
