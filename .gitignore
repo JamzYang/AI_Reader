@@ -30,6 +30,7 @@ build/
 .idea/
 *.iml
 out/
+output/
 
 # Eclipse
 .classpath
@@ -51,4 +52,3 @@ nbdist/
 .DS_Store
 Thumbs.db
 
-牧神记.txt

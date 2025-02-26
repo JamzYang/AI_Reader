@@ -19,13 +19,14 @@ public class Constants {
     public static final int THREAD_COUNT = 10;
     
     // 章节配置
-    public static final String CHAPTER_PATTERN = "第[一二三四五六七八九十百千0-9]+章\\s+.*";
+    public static final String CHAPTER_PATTERN = "\\s*第[一二三四五六七八九十百千0-9]+章\\s+.*";
     public static final int CHAPTERS_PER_FILE = 10;
+    public static final int MAX_CHAPTER_NUMBER = 1828;  // 最大章节数
     
     // Gemini API配置
-    public static final String GEMINI_MODEL = "gemini-1.5-pro-latest";
+    public static final String GEMINI_MODEL = "gemini-2.0-flash";
     public static final int MAX_OUTPUT_TOKENS = 8192;
-    public static final double TEMPERATURE = 0.7;
+    public static final double TEMPERATURE = 0.8;
     public static final int MAX_RETRIES = 3;
     public static final long RETRY_DELAY_MS = 5000;
 }
